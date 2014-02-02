@@ -5,12 +5,34 @@ import com.aivean.config.Config;
 import java.io.*;
 
 /**
- *  Service that provides integration with VLC
+ * Service that provides integration with VLC
  */
 public class VlcClient {
 
     public String enqueue(String[] urls) {
 
+        boolean pause = false;
+        int added = 0;
+
+        for (String url : urls) {
+            String out = sendCommand("enqueue", url);
+            while (out.contains("Type 'menu select' or 'pause' to continue.")) {
+                sendCommand("pause", "");
+                out = sendCommand("enqueue", url);
+                pause = true;
+            }
+            added++;
+        }
+
+        if (pause) {
+            sendCommand("pause", "");
+        }
+
+        return (added + " links added");
+
+    }
+
+    private String sendCommand(String command, String arg) {
         Process p;
         StringBuilder output = new StringBuilder();
 
@@ -18,11 +40,9 @@ public class VlcClient {
             p = Runtime.getRuntime().exec("nc -U " + Config.SOCKET);
             InputStream inputStream = p.getInputStream();
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-            for (String url : urls) {
-                if (url == null || url.trim().isEmpty()) {
-                    continue;
-                }
-                out.write("enqueue " + url.trim() + "\n");
+
+            if (command != null && !command.trim().isEmpty()) {
+                out.write(command + " " + arg.trim() + "\n");
                 out.flush();
             }
             out.close();
@@ -41,5 +61,6 @@ public class VlcClient {
         }
 
         return output.toString();
+
     }
 }
