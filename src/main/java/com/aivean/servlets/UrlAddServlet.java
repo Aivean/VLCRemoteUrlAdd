@@ -1,5 +1,8 @@
 package com.aivean.servlets;
 
+import com.aivean.socketclient.VLCController;
+import org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +17,13 @@ public class UrlAddServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("links"));
+        VLCController  c = new VLCController();
+        String res;
+        String[] urls = req.getParameter("links").split("[\\r\\n]+");
+
+        res = c.enqueue(urls);
+
+        System.out.println(res);
         resp.sendRedirect("/");
     }
 }
