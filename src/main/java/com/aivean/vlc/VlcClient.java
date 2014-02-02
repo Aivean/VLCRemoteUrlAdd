@@ -1,14 +1,13 @@
-package com.aivean.socketclient;
+package com.aivean.vlc;
 
 import com.aivean.config.Config;
 
 import java.io.*;
 
 /**
- * Created by squirrel on 2/1/14.
+ *  Service that provides integration with VLC
  */
-public class VLCController {
-
+public class VlcClient {
 
     public String enqueue(String[] urls) {
 
@@ -20,7 +19,10 @@ public class VLCController {
             InputStream inputStream = p.getInputStream();
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
             for (String url : urls) {
-                out.write("enqueue " + url + "\n");
+                if (url == null || url.trim().isEmpty()) {
+                    continue;
+                }
+                out.write("enqueue " + url.trim() + "\n");
                 out.flush();
             }
             out.close();
@@ -32,7 +34,6 @@ public class VLCController {
             }
 
             p.waitFor();
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
