@@ -5,12 +5,14 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.testng.annotations.Test;
 
 /**
  * @author <a href="mailto:ivan.zaytsev@webamg.com">Ivan Zaytsev</a>
  *         2014-02-03
  */
+@TransactionConfiguration(defaultRollback = false)
 @ContextConfiguration(locations = "classpath:spring-context.xml")
 public class DBIntegrationTest extends AbstractTransactionalTestNGSpringContextTests {
 
@@ -20,12 +22,19 @@ public class DBIntegrationTest extends AbstractTransactionalTestNGSpringContextT
     @Test
     public void testPersist() throws Exception {
         Session session = sessionFactory.getCurrentSession();
-        Show show = new Show();
+//        Show show = new Show();
+//
+//        show.setId(1L);
+//        show.setTitle("Title");
+//        show.setStatus("wathing");
+//        session.persist(show);
 
-        show.setId(1L);
-        show.setTitle("Title");
-        show.setStatus("wathing");
+        Show show = (Show) session.get(Show.class, 1L);
+        show.setTitle("title5");
 
-        session.persist(show);
+        session.merge(show);
+
+//        show.setTitle("newtitle");
+//        session.persist(show);
     }
 }
