@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="static/css/bootstrap-theme.min.css"/>
 </head>
 <body>
-    <form method="post" action="add/">
+    <form method="post" action="add">
         <div class="form-group">
             <label for="linksTextArea">Specify one or more links (one per line)</label>
             <textarea id="linksTextArea" name="links" class="form-control" rows="5"></textarea>

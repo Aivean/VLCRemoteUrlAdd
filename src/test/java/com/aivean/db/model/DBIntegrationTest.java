@@ -8,6 +8,9 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author <a href="mailto:ivan.zaytsev@webamg.com">Ivan Zaytsev</a>
  *         2014-02-03
@@ -36,5 +39,8 @@ public class DBIntegrationTest extends AbstractTransactionalTestNGSpringContextT
 
 //        show.setTitle("newtitle");
 //        session.persist(show);
+
     }
+
+
 }

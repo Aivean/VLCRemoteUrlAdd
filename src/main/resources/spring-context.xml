@@ -15,6 +15,8 @@
     <context:property-placeholder  location="classpath:jdbc.properties" ignore-unresolvable="true"/>
     <context:component-scan base-package="com.aivean"/>
 
+
+
     <bean id="dataSource" class="com.mchange.v2.c3p0.DriverManagerDataSource">
         <property name="driverClass" value="${db.driver}"/>
         <property name="jdbcUrl" value="${db.url}"/>
