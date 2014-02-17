@@ -1,12 +1,14 @@
 package com.aivean.vlc;
 
 import com.aivean.config.Config;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 
 /**
  * Service that provides integration with VLC
  */
+@Component
 public class VlcClient {
 
     public String enqueue(String[] urls) {

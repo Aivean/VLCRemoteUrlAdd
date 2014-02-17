@@ -21,13 +21,15 @@ public class UrlAddServletController {
     @Autowired
     private AddURLResult results;
 
+    @Autowired
+    private VlcClient vlc;
 
 
     @RequestMapping("/")
     public ModelAndView showMainPage() {
         logger.info("Return View");
         ModelAndView model = new ModelAndView("WEB-INF/views/index.jsp");
-        if (results != null) {
+        if (results.getResult() != null) {
             model.addObject("result", results.getResult());
             results.setResult(null);
         }
@@ -37,11 +39,11 @@ public class UrlAddServletController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@RequestParam(value = "links", required = false) String links) {
         logger.info("add request");
-        VlcClient c = new VlcClient();
+        //VlcClient c = new VlcClient();
         String res;
         if (links != null) {
             String[] urls = links.split("[\\r\\n]+");
-            res = c.enqueue(urls);
+            res = vlc.enqueue(urls);
             results.setResult(res);
             System.out.println(res);
         }

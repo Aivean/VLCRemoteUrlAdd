@@ -1,3 +1,4 @@
+<%@ page import="java.util.Map" %>
 <%-- Created by IntelliJ IDEA. --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -14,6 +15,7 @@
         </div>
         <button type="submit" class="btn btn-default">Enqueue</button>
     </form>
+
     <p>Links added:${result}</p>
 </body>
 </html>
