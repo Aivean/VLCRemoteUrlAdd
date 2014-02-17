@@ -14,7 +14,7 @@
                 classpath:servlet-context2.xml
             </param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <load-on-startup>0</load-on-startup>
     </servlet>
 
 
@@ -22,4 +22,10 @@
     <servlet-name>UrlAddServletController</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
 </web-app>

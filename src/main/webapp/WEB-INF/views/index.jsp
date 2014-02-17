@@ -14,5 +14,6 @@
         </div>
         <button type="submit" class="btn btn-default">Enqueue</button>
     </form>
+    <p>Links added:${result}</p>
 </body>
 </html>
