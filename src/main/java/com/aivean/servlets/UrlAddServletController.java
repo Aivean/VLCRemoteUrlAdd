@@ -28,7 +28,7 @@ public class UrlAddServletController {
     @RequestMapping("/")
     public ModelAndView showMainPage() {
         logger.info("Return View");
-        ModelAndView model = new ModelAndView("WEB-INF/views/index.jsp");
+        ModelAndView model = new ModelAndView("index");
         if (results.getResult() != null) {
             model.addObject("result", results.getResult());
             results.setResult(null);
