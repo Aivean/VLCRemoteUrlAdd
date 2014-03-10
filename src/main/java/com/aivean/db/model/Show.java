@@ -1,9 +1,7 @@
 package com.aivean.db.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author <a href="mailto:ivan.zaytsev@webamg.com">Ivan Zaytsev</a>
@@ -13,6 +11,8 @@ import javax.persistence.Table;
 @Table(name = "shows")
 public class Show {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "show_id")
     private Long id;
 
     @Column
@@ -29,6 +29,10 @@ public class Show {
 
     @Column(name = "total_episodes")
     private Integer totalEpisodes;
+
+    @OneToMany
+    @JoinColumn
+    private List<Season> seasons;
 
 
     public Long getId() {

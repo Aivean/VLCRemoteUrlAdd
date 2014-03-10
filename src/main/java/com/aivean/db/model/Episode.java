@@ -1,9 +1,6 @@
 package com.aivean.db.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by squirrel on 2/17/14.
@@ -13,13 +10,17 @@ import javax.persistence.Table;
 public class Episode {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "episode_id")
     private Long id;
 
-    @Column(name = "show_id")
-    private Long showId;
+    @ManyToOne
+    @JoinColumn(name = "show_id")
+    private Show show;
 
-    @Column(name = "season_number")
-    private Integer seasonNumber;
+    @ManyToOne
+    @JoinColumn(name = "season_id")
+    private Season season;
 
     @Column
     private String title;
@@ -36,20 +37,20 @@ public class Episode {
         this.id = id;
     }
 
-    public Long getShowId() {
-        return showId;
+    public Show getShowId() {
+        return show;
     }
 
-    public void setShowId(Long showId) {
-        this.showId = showId;
+    public void setShowId(Show showId) {
+        this.show = showId;
     }
 
-    public Integer getSeasonNumber() {
-        return seasonNumber;
+    public Season getSeasonNumber() {
+        return season;
     }
 
-    public void setSeasonNumber(Integer seasonNumber) {
-        this.seasonNumber = seasonNumber;
+    public void setSeasonNumber(Season seasonNumber) {
+        this.season = seasonNumber;
     }
 
     public String getTitle() {
